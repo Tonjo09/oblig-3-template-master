@@ -84,12 +84,39 @@ public class SBinTre<T> {
     }
 
     public boolean leggInn(T verdi) {
-        if (verdi == null)
+
+        if (verdi == null) //nullverdier ikke tillatt
             return false;
 
         Node<T> p = rot;
+        Node<T> q = null;
+        int cmp = 0;
 
+        while (p != null)
+        {
+            q = p;
+            cmp = comp.compare(verdi,p.verdi);
+            p = cmp < 0 ? p.venstre : p.høyre;// hvis cmp er mindre enn 0 så setter man venstre barn, ellers høyre
+        }
+
+        // p er nå null, dvs. ute av treet, q er den siste vi passerte
+
+        p = new Node<>(verdi, q); //Satt inn q som forelder
+
+        if (q == null) {
+            rot = p;
+        }
+        else if (cmp < 0) {
+            q.venstre = p;
+        }
+        else {
+            q.høyre = p;
+        }
+        antall++;
+        endringer++;
+        return true;
     }
+
     public boolean fjern(T verdi) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
@@ -134,5 +161,11 @@ public class SBinTre<T> {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+    public static void main (String[] args) {
+        Integer[] a = {4,7,2,9,5,10,8,1,3,6};
+        SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
+        for (int verdi : a) {tre.leggInn(verdi); }
+        System.out.println(tre.antall());  // Utskrift: 10
+    }
 
 } // ObligSBinTre

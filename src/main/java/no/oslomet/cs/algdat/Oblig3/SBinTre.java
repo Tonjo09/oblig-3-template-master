@@ -92,10 +92,9 @@ public class SBinTre<T> {
         Node<T> q = null;
         int cmp = 0;
 
-        while (p != null)
-        {
+        while (p != null) {
             q = p;
-            cmp = comp.compare(verdi,p.verdi);
+            cmp = comp.compare(verdi, p.verdi);
             p = cmp < 0 ? p.venstre : p.høyre;// hvis cmp er mindre enn 0 så setter man venstre barn, ellers høyre
         }
 
@@ -105,11 +104,9 @@ public class SBinTre<T> {
 
         if (q == null) {
             rot = p;
-        }
-        else if (cmp < 0) {
+        } else if (cmp < 0) {
             q.venstre = p;
-        }
-        else {
+        } else {
             q.høyre = p;
         }
         antall++;
@@ -126,9 +123,18 @@ public class SBinTre<T> {
     }
 
     public int antall(T verdi) {
-      Node<T> p = rot;
-      int antall = 0;
+        Node<T> p = rot;
+        int antallLike = 0;
+
+        while (p != null) { //Sjekker gjennom nodene, og teller antall ganger verdien dukker opp
+            int cmp = comp.compare(verdi, p.verdi);
+            if (cmp == 0)
+                antallLike++; //Øker antallLike hvis cmp == 0
+            p = cmp < 0 ? p.venstre : p.høyre; //Ternary operator, går til venstre hvis sann ellers høyre
+        }
+        return antallLike;
     }
+
 
     public void nullstill() {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
@@ -162,10 +168,12 @@ public class SBinTre<T> {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
-    public static void main (String[] args) {
-        Integer[] a = {4,7,2,9,5,10,8,1,3,6};
+    public static void main(String[] args) {
+        Integer[] a = {4, 7, 2, 9, 5, 10, 8, 1, 3, 6};
         SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
-        for (int verdi : a) {tre.leggInn(verdi); }
+        for (int verdi : a) {
+            tre.leggInn(verdi);
+        }
         System.out.println(tre.antall());  // Utskrift: 10
     }
 

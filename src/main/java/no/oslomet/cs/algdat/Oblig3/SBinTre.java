@@ -1,10 +1,7 @@
 package no.oslomet.cs.algdat.Oblig3;
 
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class SBinTre<T> {
     private static final class Node<T>   // en indre nodeklasse
@@ -196,8 +193,25 @@ public class SBinTre<T> {
     }
 
     public ArrayList<T> serialize() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        ArrayList<T> list = new ArrayList<>(antall);
+
+        ArrayDeque<Node<T>> stack = new ArrayDeque<>();
+        stack.addFirst(rot); // Lager en stack med rot noden
+
+        //Itererer over nodene i stacken, også legger til i en liste (nivå orden)
+        while (!stack.isEmpty()) {
+            Node<T> p = stack.removeFirst();
+            list.add(p.verdi);
+
+            if(p.venstre != null)
+                stack.addLast(p.venstre);
+            if(p.høyre != null)
+                stack.addLast(p.høyre);
+        }
+
+        return list; //Returnerer listen med alle verdiene
     }
+
 
     static <K> SBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");

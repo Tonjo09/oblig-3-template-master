@@ -41,3 +41,13 @@ Måtte først finne den første noden i postorden, deretter traverserer postorde
 Så brukes metoden nestePostorden for å finne p sin neste i postorden og deretter traverserer nestePostorden-metoden for å finne p her også
 Når det ikke er flere noder har vi funnet p, og postorden-metoden skriver ut p sin verdi
 Metoden skal her kalle på seg selv så lenge p har venstre barn og høyre barn, når det er gått igjennom både venstre og høyre subtre og p ikke har flere barn skal den til slutt returnere p sin verdi
+
+Oppgave 5: 
+I denne metoden skal man traversere treet i nivåorden 
+Hvis binærtreet inneholder noder med verdier skrives verdiene ut med en verdi for hver iterasjon.
+Må lage en (ArrayList kalt) kø der instanser av Node legges inn i køen --> denne skrives ut til konsollet.
+Derfor må man lage en liste som skal skrives ut, der først rotnoden legges inn, så barna, og slik fortsetter det helt til det ikke er flere noder i køen.
+Når det ikke er flere i køen skrives listen skrivUt ut med alle verdiene satt inn.
+
+deserialize-metoden har jeg tatt utgangspunkt i måten jeg har satt inn en arrayliste i et tre når jeg skal sjekke metodene mine i main.
+Da lager jeg et tomt tre, hvor jeg går gjennom ArrayList-listen min fra serialize-metoden og setter inn en og en verdi ved bruk av leggInn-metoden. Og til slutt returnerer jeg det utfylte binærtreet.

@@ -186,10 +186,10 @@ public class SBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        if (p.venstre != null) { // Går igjennom venstre subtre
+        if (p.venstre != null) {  // Går igjennom venstre subtre
             postordenRecursive(p.venstre, oppgave); // metoden kalles med p sin venstre som parameter
         }
-        if (p.høyre != null) { // Går igjennom høyre subtre
+        if (p.høyre != null) {  // Går igjennom høyre subtre
             postordenRecursive(p.høyre, oppgave); // Metoden kalles med p sin høyre som parameter
         }
         oppgave.utførOppgave(p.verdi);

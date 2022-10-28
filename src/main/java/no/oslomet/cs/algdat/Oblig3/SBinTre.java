@@ -214,7 +214,13 @@ public class SBinTre<T> {
 
 
     static <K> SBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        SBinTre<K> tre = new SBinTre<>(c);
+
+        //Lager treet med å legge inn en og en verdi fra data listen
+        for (int i = 0; i < data.size(); i++) {
+            tre.leggInn(data.get(i));
+        }
+        return tre; //Returnerer det nye treet med alle verdiene fra data listen
     }
 
     public static void main(String[] args) {

@@ -174,10 +174,10 @@ public class SBinTre<T> {
 
         //Traverserer over alle noder ved å først finne første i postorden,
         //Deretter finne neste helt til noden blir null.
-        Node<T> cur = førstePostorden(rot);
-        while (cur != null) {
-            oppgave.utførOppgave(cur.verdi);
-            cur = nestePostorden(cur);
+        Node<T> p = førstePostorden(rot);
+        while (p != null) {
+            oppgave.utførOppgave(p.verdi);
+            p = nestePostorden(p);
         }
     }
 

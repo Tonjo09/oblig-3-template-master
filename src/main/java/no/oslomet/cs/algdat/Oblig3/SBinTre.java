@@ -150,12 +150,23 @@ public class SBinTre<T> {
         } else {
             return p;
         }
-
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (p.forelder == null) {
+            return null;
+        }
+        if (p.forelder.høyre == p) { //Sjekker om p er høyrebarn, neste postorden forelderen til p
+            return p.forelder;
+        }
+        else if (p.forelder.høyre == null) { // Hvis p er venstre barn, sjekkes det om p er har et høyre søsken, neste postorden forelderen til p
+            return p.forelder;
+        }
+        else { //Om p er venstrebarn og har høyre søsken er denne neste postorden
+            return førstePostorden(p.forelder.høyre);
+        }
     }
+
 
     public void postorden(Oppgave<? super T> oppgave) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
